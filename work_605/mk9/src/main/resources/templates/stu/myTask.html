@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生-我的课程</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<hr>
+<h4>我的课程： 我所在班级的课程表及任课教师</h4>
+<table border="1" width="80%" style="background-color: #ebf2f1">
+    <tr>
+        <th>教师ID</th>
+        <th>教师名称</th>
+        <th>班级编号</th>
+        <th>班级名称</th>
+        <th>课程号</th>
+        <th>课程名称</th>
+    </tr>
+    <tr th:each="t: ${tasks}">
+        <td><span th:text="${t.tid}"></span></td>
+        <td><span th:text="${t.uname}"></span></td>
+        <td><span th:text="${t.clzno}"></span></td>
+        <td><span th:text="${t.clzname}"></span></td>
+        <td><span th:text="${t.cno}"></span></td>
+        <td><span th:text="${t.cname}"></span></td>
+    </tr>
+</table>
+</body>
+</html>

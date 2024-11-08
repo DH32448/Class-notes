@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tom.dao.TaskMapper" >
+    <select id="findAll" resultType="cn.tom.entity.TaskInfo">
+        SELECT t_task.kid, t_task.tid, t_user.`uname`,
+               t_task.`clzno`, t_clz.`clzname`,
+              t_task.cno, t_course.`cname`
+        FROM  t_task, t_user, t_clz, t_course
+        WHERE t_task.`tid` = t_user.`uid`
+        AND t_task.`clzno` = t_clz.`clzno`
+        AND t_task.`cno` = t_course.`cno`
+    </select>
+
+    <select id="findByClzno"
+            parameterType="String"
+            resultType="cn.tom.entity.TaskInfo">
+        SELECT t_task.kid, t_task.tid, t_user.`uname`,
+               t_task.`clzno`, t_clz.`clzname`,
+              t_task.cno, t_course.`cname`
+        FROM  t_task, t_user, t_clz, t_course
+        WHERE t_task.`tid` = t_user.`uid`
+        AND t_task.`clzno` = t_clz.`clzno`
+        AND t_task.`cno` = t_course.`cno`
+        AND t_task.clzno = #{clznno}
+    </select>
+
+    <select id="findByTid" parameterType="Integer"
+            resultType="cn.tom.entity.TaskInfo">
+        SELECT t_task.kid, t_task.tid, t_user.`uname`,
+               t_task.`clzno`, t_clz.`clzname`,
+              t_task.cno, t_course.`cname`
+        FROM  t_task, t_user, t_clz, t_course
+        WHERE t_task.`tid` = t_user.`uid`
+        AND t_task.`clzno` = t_clz.`clzno`
+        AND t_task.`cno` = t_course.`cno`
+        AND  t_task.tid = #{tid}
+    </select>
+
+    <insert id="add" parameterType="cn.tom.entity.TaskInfo">
+        insert into t_task(tid, clzno, cno)
+        values (#{tid}, #{clzno}, #{cno})
+    </insert>
+    <delete id="remove" parameterType="int">
+        delete from t_task where kid = #{kid}
+    </delete>
+</mapper>
+
+<!--
+    public List<TaskInfo> findAll();
+    public int  add(TaskInfo task);
+    public int remove(int kid);
+-->

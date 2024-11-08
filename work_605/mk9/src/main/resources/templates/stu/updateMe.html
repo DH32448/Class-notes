@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生-更新我的密码</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>学生-更新我的密码</h3>
+<hr>
+  <div >
+      <form action='/stu/updateMe' method='post'>
+          <!--<p>UID:<input type='text' name='uid' th:value="${u.uid}"  readonly></p>-->
+          <p>姓名:<input type='text' name='sname' th:value="${u.uname}"></p>
+          <p>密码:<input type='text' name='pwd' th:value="${u.pwd}"></p>
+          <p>手机: <span th:text="${u.phone}"></span></p>
+          <p>所在班级: <span th:text="${u.clzno}"></span> &nbsp;&nbsp;
+              <span th:text="${u.clzname}"></span>
+          </p>
+          <p><input type='submit' value='更新'></p>
+      </form>
+  </div>
+</body>
+</html>

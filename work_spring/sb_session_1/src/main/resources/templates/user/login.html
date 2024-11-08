@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+   <div style="border: 1px solid greenyellow">
+       <h2>XXXX  系统</h2>
+       <h4 th:if = "${session.DL!=null}">
+           <span  th:text="${session.DL.sname}"></span>
+           <span  th:text="${session.DL.phone}"></span>
+       </h4>
+       <span><a href="/user/logout">退出</a></span>
+   </div>
+
+   <div style="display: flex; justify-content: space-around">
+       <!-- 登录区 -->
+       <div style="width: 33%; border: 1px solid red">
+           <h2>登录</h2>
+           <form method="post" action="/user/login">
+               <table width="80%">
+                   <tr>
+                       <td>账号</td>
+                       <td><input type="text" name="phone" /></td>
+                   </tr>
+                   <tr>
+                       <td>密码</td>
+                       <td><input type="password" name="pwd" /></td>
+                   </tr>
+                   <tr>
+                       <td></td>
+                       <td><input type="submit"  value="登录"/> </td>
+                   </tr>
+               </table>
+           </form>
+           <hr>
+           登录信息: <span th:text="${loginmsg}"></span>
+       </div>
+       <!-- 功能区-->
+       <div style="width: 66%; border: 1px solid blue">
+           <h2>教务处的功能</h2>
+           <p><a href="#">班级</a></p>
+           <p><a href="#">课程</a></p>
+           <p><a href="#">教师</a></p>
+           <p><a href="#">学生</a></p>
+           <p><a href="#">排课</a></p>
+           <h2>学生的功能</h2>
+           <p><a href="#">修改密码</a></p>
+           <p><a href="#">修改头像</a></p>
+           <p><a href="#">查课程</a></p>
+           <p><a href="#">查成绩</a></p>
+           <h2>教师的功能</h2>
+           <p><a href="#">修改密码</a></p>
+           <p><a href="#">修改头像</a></p>
+           <p><a href="#">查课程</a></p>
+           <p><a href="#">登分-难</a></p>
+
+       </div>
+   </div>
+
+</body>
+</html>

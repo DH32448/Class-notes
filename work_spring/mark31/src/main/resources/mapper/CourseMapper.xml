@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tom.dao.CourseMapper" >
+    <select id="findAll"  resultType="cn.tom.entity.Course">
+
+        SELECT * FROM t_course
+
+    </select>
+
+    <select id="findOne"  parameterType="String"
+            resultType="cn.tom.entity.Course">
+
+        SELECT * FROM t_course where cno=#{no}
+
+    </select>
+
+    <select id="findInfo"  resultType="java.util.Map">
+        SELECT t_course.cno cno, t_course.cname cname,
+                t_course.tid tid, t_teacher.tname tname
+        From t_course, t_teacher
+        where t_course.tid = t_teacher.tid
+    </select>
+
+    <insert id="add" parameterType="cn.tom.entity.Course" >
+        insert into t_course(cno, cname, tid)
+        values ( #{cno}, #{cname}, #{tid})
+    </insert>
+
+    <insert id="add2" parameterType="Map" >
+        insert into t_course(cno, cname, tid)
+        values ( #{no}, #{name}, #{tid})
+    </insert>
+
+    <update id="updateByNo" parameterType="Map">
+        update t_course set cname = #{name}, tid = #{tid}
+        where cno = #{no}
+    </update>
+
+</mapper>
+
+<!-- result  结果  Type 类型   单条记录类型-->
+<!-- id  接口方法名称-->

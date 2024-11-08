@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>分页</title>
+</head>
+<body>
+  <h2>
+      学生分页
+  </h2>
+
+<table>
+    <tr th:each="x: ${list}">
+        <td th:text="${x.sno}"></td>
+        <td th:text="${x.sname}"></td>
+        <td th:text="${x.phone}"></td>
+    </tr>
+</table>
+<div>
+    <a th:href="'/stu/prev?curpage=' +${cp}">上一页</a>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

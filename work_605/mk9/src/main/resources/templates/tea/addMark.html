@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师-登分</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>我的登分-录入成绩</h3>
+<div>
+    <table width="90%" border="1" cellspacing="0">
+        <tr>
+            <th>id</th>
+            <th>班级编号</th>
+            <th>学号</th>
+            <th>学生姓名</th>
+            <th>课程编号</th>
+            <th>课程名称</th>
+            <th>分数</th>
+            <th>操作</th>
+        </tr>
+
+        <tr th:each=" m : ${mks}">
+            <form action="/tea/addMark" >
+                <td><input type="text" name="id" th:value = "${m.id}" readonly  size="10" ></td>
+                <td><input type="text" name="clzno" th:value = "${clz.clzno}" readonly  size="10" ></td>
+                <td><input type="text" name="sno" th:value = "${m.sno}" readonly size="10" ></td>
+                <td> <span th:text="${m.sname}"></span></td>
+                <td><input type="text" name="cno" th:value = "${m.cno}" readonly  size="10" ></td>
+                <td> <span th:text="${m.cname}"></span> </td>
+                <td><input type="text" name="score" th:value = "${m.score}"></td>
+                <td><input type="submit" value="保存"></td>
+            </form>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

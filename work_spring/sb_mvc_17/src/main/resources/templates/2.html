@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>2</title>
+</head>
+<body>
+   <h2>222222222222222222222</h2>
+  <div th:text="${clzs}">
+
+  </div>
+   <div>
+       <!--  th:each="对象名:${对象列表}"-->
+       <p>hello</p>
+       <!--th:text  不支持 HTML 语法-->
+       <p  th:text=  "${hello}" >     </p>
+
+       <!--th:utext  支持 HTML 语法-->
+       <p  th:utext= "${hello}">      </p>
+
+       <table border="1" width="80%">
+           <!-- for(Clz  x : map.get("clzs") >-->
+           <tr th:each=" x : ${clzs}">
+               <td th:text="${x.clzno}"></td>
+               <td th:text="${x.clzname}"></td>
+               <!--  <a th:href=" '/login?addr=' + ${addr} ">-->
+               <td><a th:href="'/hi/del?clzno=' + ${x.clzno}"> 删除</a></td>
+           </tr>
+       </table>
+   </div>
+   <!--  th:  [th]ymeleaf -->
+  <div th:text="${courses}">
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>班级页面显示</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>班级管理</h3>
+<hr>
+  <div style="display: flex">
+      <div style="width: 50%;">
+        <table border="1" width="80%">
+                <tr th:each = "c : ${clzs}">
+                    <td><span th:text="${c.clzno}"></span></td>
+                    <td><span th:text="${c.clzname}"></span></td>
+                    <td>
+                        <!--<a th:href="'/book/page?book='+${bookId}+'&page='+${pageNumber}"-->
+                        <a th:href="'/adm/clz/go2Update?clzno='+${c.clzno}">
+                            更改班级名称
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="'/adm/clz/del?clzno='+${c.clzno}">
+                        删除该班级
+                    </a>
+                    </td>
+                </tr>
+        </table>
+      </div>
+     <!-- 输入-->
+      <div style="width: 48%;">
+          <button><a href="/adm/clz/go2Add">添加一个新的班级</a></button>
+          <hr>
+          <h4 th:if="${action=='Add'}">添加班级</h4>
+          <h4 th:if="${action=='Update'}">修改班级</h4>
+          <form  th:action="'/adm/clz/do' + ${action}" method='post'>
+              <p>班级编号:<input type='text' name='clzno'
+                             th:value="${clz.clzno}" th:readonly="${action=='Update'}"></p>
+              <p>班级名称:<input type='text' name='clzname'
+                             th:value="${clz.clzname}"></p>
+              <p th:if="${action=='Add'}"><input type='submit' value='添加班级'></p>
+              <p th:if="${action=='Update'}"><input type='submit' value='更新班级'></p>
+          </form>
+      </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Stu</title>
+</head>
+<body>
+   <H2>stu/add.html</H2>
+   <div>
+  <!--  private String sno;
+   private String sname;
+   private String phone;
+   private String clzno;
+   private Date birthday;-->
+       <!-- action 请求路径 @equestMapping    -->
+       <!-- method  get/post  get 地址栏参数     post 走 Body-->
+       <form th:action="'/stu/' + ${action}" method="post" >
+           sno:<input type="text" name="sno"  /> <br>
+           sname:<input type="text" name = "sname" /><br>
+           phone:<input type="text" name = "phone"
+                        th:value="stu.phone" /><br>
+           <!--clzno:<input type="text" name = "clzno" /><br>-->
+           clzno: <select name="clzno">
+                     <!--<option>1班</option>-->
+                     <!--<option>2班</option>-->
+                     <option th:each="x : ${clzs}"
+                              th:text="${x.clzname}"
+                              th:value="${x.clzno}">
+                     </option>
+                  </select>
+           <br>
+           <!-- html5  type="date" 支持日期选择  yyyy/MM/dd   年/月/日-->
+           <!-- new SimpleDateFormat("yyyy/MM/dd")-->
+           birthday:<input type="date" name = "birthday" /><br>
+
+           <input type="submit" th:value="${actmsg}"/>
+           <!--
+           <input type="submit" th:value="添加"/>
+           <input type="submit" th:value="修改"/>
+           -->
+       </form>
+   </div>
+</body>
+</html>

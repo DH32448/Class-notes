@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tom.dao.TeacherMapper" >
+
+    <select id="findOneIf" parameterType="Map"
+            resultType="cn.tom.entity.Teacher">
+         SELECT * from t_teacher where 1=1
+         <if test="tid != null" >
+             AND  tid = #{tid}
+         </if>
+        <if test="phone != null" >
+            AND phone = #{phone}
+        </if>
+    </select>
+
+    <select id="findAll"  resultType="cn.tom.entity.Teacher">
+        SELECT * from t_teacher;
+    </select>
+    <update id="update"  parameterType="cn.tom.entity.Teacher" >
+        update t_teacher set tname= #{tname},
+                              phone = #{phone},
+                              pwd = #{pwd},
+                              sal = #{sal},
+                              birth = #{birth}
+        where tid = #{tid}
+    </update>
+    <insert id="add" parameterType="cn.tom.entity.Teacher" >
+        insert into t_teacher(tname, phone, pwd,
+                               sal, birth )
+                values (#{tname}, #{phone}, #{pwd},
+                        #{sal}, #{birth} )
+    </insert>
+    <delete id="remove"  parameterType="int">
+        delete from t_teacher where tid = #{tid}
+    </delete>
+</mapper>
+
+<!-- result  结果  Type 类型   单条记录类型-->
+<!-- id  接口方法名称-->

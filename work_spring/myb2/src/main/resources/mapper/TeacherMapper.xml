@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- namespace 命名空间  对应接口的包名称-->
+<mapper namespace="cn.tom.dao.TeacherMapper">
+    <!-- id 对应的接口的方法名 -->
+    <!-- parameterType 参数类型 无-->
+    <!-- resultType 结果类型 单条记录的类型 -->
+    <select id="findAll" resultType="Map" >
+        select * from t_teacher
+    </select>
+
+    <!-- 一般添加 删除 修改 没有返回值类型 无 resultType -->
+    <!-- valuse 改 Teacher 成员变量名称-->
+    <insert id="add" parameterType="cn.tom.entity.Teacher">
+        <selectKey keyProperty="tid" order="AFTER" resultType="int">
+            select     last_insert_id()
+        </selectKey>
+        insert into t_teacher( t_teacher.tname, t_teacher.phone, t_teacher.pwd,
+                       t_teacher.birth_day, t_teacher.salary)
+            values(#{tname}, #{phone}, #{pwd}, #{birthDay}, #{salary});
+    </insert>
+    <!-- parameterType 参数类型 Map.startnum  Map.pageline-->
+    <!-- resultType 查询结果单条记录的类型 Teacher-->
+    <select id="findPage" parameterType="Map" >
+        select * from t_teacher
+         limit #{startnum}, #{pageline}
+    </select>
+
+    <!-- @Param(参数名称) ，无需指定参数类型， 慎重使用 -->
+    <select id="findPage2"  >
+        select * from t_teacher
+         limit #{n1}, #{n2}
+    </select>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tom.dao.MarkMapper" >
+    <select id="findBySnoCno" parameterType="Map"
+            resultType="cn.tom.entity.Mark">
+        SELECT * from t_mark
+        WHERE sno = #{sno} AND cno=#{cno} limit 1
+    </select>
+    <select id="findBySno" parameterType="String"
+            resultType="cn.tom.entity.MarkInfo">
+        SELECT m.*, z.clzname clzname,  c.cname cname, u.clzno clzno, u.uname uname
+        FROM  t_mark m, t_user u, t_clz z, t_course c
+        WHERE  m.sno = u.phone
+        AND  u.clzno = z.clzno
+        AND  m.cno = c.cno
+        AND m.sno = #{sno}
+    </select>
+
+    <insert id="add" parameterType="cn.tom.entity.Mark">
+        insert into t_mark(sno, cno, score, tpost)
+        values (#{sno}, #{cno}, #{score}, #{tpost})
+    </insert>
+    <update id="update" parameterType="cn.tom.entity.Mark">
+        update t_mark set score=#{score}  where id=#{id}
+    </update>
+</mapper>
+
+<!--
+   //查询某个学生某一门课程的分数
+    public Mark findBySnoCno(Map<String, Object> map);
+    //查询某个学生所有课程的分数
+    public List<MarkInfo> findBySno(String sno);
+    //更新分数， 根据主键 t_mark.id >0
+    public int update(Mark mark);
+    //添加分数， 根据主键 t_mark.id ==0
+    public int add(Mark mark);
+-->

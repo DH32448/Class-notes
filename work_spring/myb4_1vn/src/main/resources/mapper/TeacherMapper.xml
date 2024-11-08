@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- namespace 命名空间  对应接口的包名称-->
+<mapper namespace="cn.tom.dao.TeacherMapper">
+    <resultMap id="tea_cou_map" type="cn.tom.entity.Teacher">
+        <!--先写主表， 确认主键-->
+        <id column="tid" property="tid" />
+        <result column="tname" property="tname" />
+        <result column="phone" property="phone" />
+
+        <!-- collection 集合， 并且List 父接口-->
+        <!-- 用 ofType 指定 集合里面 泛型-->
+        <collection property="courses"
+                    ofType="cn.tom.entity.Course">
+            <!--一对多， 一定要写 id  t_course 主键 -->
+            <id column="cno" property="cno" />
+            <result column="cname" property="cname"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAll"  resultMap="tea_cou_map">
+        select
+           t_teacher.tid     tid,
+           t_teacher.tname   tname,
+           t_teacher.phone   phone,
+           t_course.cno      cno,
+           t_course.cname    cname
+        from t_teacher, t_course
+        where t_teacher.tid = t_course.tid
+        order by tid
+
+    </select>
+
+</mapper>

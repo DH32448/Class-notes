@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师-登分选择</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>我的登分-选择班级和课程</h3>
+<div>
+    <table border="1" width="60%" style="background-color: #ccd3d2">
+        <tr>
+            <th>班级编号</th>
+            <th>班级名称</th>
+            <th>课程号</th>
+            <th>课程名称</th>
+            <th>请选择</th>
+        </tr>
+        <tr th:each=" t : ${tasks}">
+                <td><span th:text="${t.clzno}"></span></td>
+                <td><span th:text="${t.clzname}"></span></td>
+                <td><span th:text="${t.cno}"></span></td>
+                <td><span th:text="${t.cname}"></span></td>
+                <td>
+                    <a th:href="'/tea/findMark?clzno=' + ${t.clzno} + '&cno='+ ${t.cno}">
+                        <button>检索该班的所有学生及已经录入的成绩</button>
+                    </a>
+                </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

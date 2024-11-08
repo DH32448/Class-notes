@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tom.dao.UserMapper" >
+    <!--public User findOneByPhone(String phone);-->
+    <select id="findOneByPhone" parameterType="String"
+            resultType="cn.tom.entity.User">
+        select * from t_user where phone = #{phone}
+     </select>
+
+     <select id="findByRole" parameterType="int"
+         resultType="cn.tom.entity.User">
+         SELECT t_user.uid uid, t_user.uname uname, t_user.phone phone,
+               t_user.pwd pwd, t_user.clzno clzno, t_user.role roe,
+                 t_clz.clzname clzname
+          FROM t_user LEFT JOIN t_clz
+          ON (t_user.clzno = t_clz.clzno)
+          where t_user.role = #{role}
+     </select>
+    <!-- findStusByclz(String clzno)-->
+    <select id="findStusByclz" parameterType="String"
+            resultType="cn.tom.entity.User">
+         SELECT t_user.uid uid, t_user.uname, t_user.phone phone,
+               t_user.pwd pwd, t_user.clzno clzno, t_user.role roe,
+                 t_clz.clzname clzname
+          FROM t_user LEFT JOIN t_clz
+          ON (t_user.clzno = t_clz.clzno)
+          where t_user.role = 1
+                AND t_user.clzno=#{clzno}
+     </select>
+
+    <select id="findByUid" parameterType="int"
+            resultType="cn.tom.entity.User">
+         SELECT t_user.uid uid, t_user.uname, t_user.phone phone,
+               t_user.pwd pwd, t_user.clzno clzno, t_user.role role,
+                 t_clz.clzname clzname
+          FROM t_user LEFT JOIN t_clz
+          ON (t_user.clzno = t_clz.clzno)
+          where t_user.uid = #{uid}
+     </select>
+     <insert id="add" parameterType="cn.tom.entity.User">
+         insert into t_user(uname, phone, pwd,clzno, role )
+         values (#{uname}, #{phone}, #{pwd}, #{clzno}, #{role})
+     </insert>
+    <update id="update" parameterType="cn.tom.entity.User">
+         update t_user
+           set uname = #{uname},
+                phone = #{phone},
+                pwd = #{pwd},
+                clzno = #{clzno},
+                role = #{role}
+            where uid = #{uid}
+     </update>
+    <update id="updatePwd" parameterType="cn.tom.entity.User">
+         update t_user
+           <set>
+               <if test="uname!=null"> uname = #{uname},</if>
+               <if test="phone!=null"> phone = #{phone},</if>
+               <if test="pwd!=null"> pwd = #{pwd} </if>
+           </set>
+            where uid = #{uid}
+     </update>
+     <delete id="remove" parameterType="int" >
+          delete from t_user where uid=#{uid}
+     </delete>
+</mapper>
+
+<!--
+   //User 类里面加了一个属性: clzname
+    public User findOneByPhone(String phone);  //登录使用
+    //如下 2 个查询都用 左连接完成， 这样就适应教师和学生的要求
+    public List<User> findByRole(int role);  //根据角色找  学生=1， 教师 =5
+    public User  findByUid(int uid);
+
+    public int add(User user);   //角色 及班级编号在 教师和学生控制器中完成
+    public int update(User  user); //角色 及班级编号在 教师和学生控制器中完成
+    public int remove(int uid);
+-->

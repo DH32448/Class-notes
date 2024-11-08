@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师页面</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>教师管理</h3>
+<hr>
+  <div style="display: flex">
+      <div style="width: 50%;">
+        <table border="1" width="90%">
+                <tr th:each = "t : ${teas}">
+                    <td><span th:text="${t.uid}"></span></td>
+                    <td><span th:text="${t.uname}"></span></td>
+                    <td><span th:text="${t.phone}"></span></td>
+                    <td><span th:text="${t.pwd}"></span></td>
+                    <td>
+                        <!--<a th:href="'/book/page?book='+${bookId}+'&page='+${pageNumber}"-->
+                        <a th:href="'/adm/tea/go2Update?uid='+${t.uid}">
+                            更改
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="'/adm/tea/del?uid='+${t.uid}">
+                        删除
+                    </a>
+                    </td>
+                </tr>
+        </table>
+      </div>
+     <!-- 输入-->
+      <div style="width: 48%;">
+          <button><a href="/adm/tea/go2Add">添加一位新教师</a></button>
+          <hr>
+          <h4 th:if="${action=='Add'}">添加教师</h4>
+          <h4 th:if="${action=='Update'}">修改教师</h4>
+          <form  th:action="'/adm/tea/do' + ${action}" method='post'>
+              <p>编号:<input type='text' name='uid'
+                             th:value="${user.uid}" readonly></p>
+              <p>名称:<input type='text' name='uname'
+                             th:value="${user.uname}"></p>
+              <p>电话:<input type='text' name='phone'
+                           th:value="${user.phone}"></p>
+              <p>密码:<input type='text' name='pwd'
+                           th:value="${user.pwd}"></p>
+              <p th:if="${action=='Add'}"><input type='submit' value='添加教师'></p>
+              <p th:if="${action=='Update'}"><input type='submit' value='更新教师'></p>
+          </form>
+      </div>
+  </div>
+</body>
+</html>

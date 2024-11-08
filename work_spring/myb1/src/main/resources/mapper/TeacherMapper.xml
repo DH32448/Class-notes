@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--第一步: namespace 对应的接口 包名称 + 接口名称 -->
+<mapper namespace="cn.tom.dao.TeacherMapper" >
+
+    <update id="update"
+            parameterType="cn.tom.entity.Teacher">
+        update t_teacher
+        set tname = #{name},
+             phone = #{phone},
+             pwd = #{pwd},
+             birth_day = #{birthDay},
+             salary = #{salay}
+        where tid = #{tid}
+    </update>
+
+    <delete id="del" parameterType="int" >
+        delete from t_teacher where tid=#{tid}
+    </delete>
+    <select id="findById"
+         parameterType="int"
+            resultType="cn.tom.entity.Teacher" >
+
+        select tid,tname name,phone,
+                pwd, birth_day, salary
+        from t_teacher
+        where tid=#{x}
+    </select>
+
+
+    <select id="findAll"
+            resultType="cn.tom.entity.Teacher" >
+
+        select tid,tname name,phone,
+                pwd, birth_day, salary
+        from t_teacher
+
+    </select>
+
+    <select id="findById"
+            parameterType="int"
+            resultType="java.util.Map" >
+
+        select tid,tname name,phone,
+                pwd, birth_day, salary
+        from t_teacher
+        where tid=#{x}
+    </select>
+
+<!--  查找多少条-->
+    <select id="getCount"  resultType="int" >
+        select count(*) num from t_teacher
+    </select>
+    <!-- insert update delete 受到影响行-->
+    <!-- paramtere 参数-->
+    <delete id="del"  parameterType="int">
+        delete from where tid=#{tid}
+    </delete>
+</mapper>

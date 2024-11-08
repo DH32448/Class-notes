@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师列表</title>
+</head>
+<body>
+
+<div th:text="'ts=' + ${ts}"></div>
+<table border="1" width="60%" th:if="${ts.size>0}">
+    <tr th:each="t : ${ts}">
+        <td><span th:text="${t.tname}"></span></td>
+
+        <td><span th:text="${t.phone}"></span></td>
+
+        <td>
+            <span th:if="${t.sal>=10000}"><span>高收入</span></span>
+            <span th:if="${t.sal>=5000 and t.sal<10000}"><span>一般</span></span>
+            <span th:if="${t.sal<5000}"><span>低收入</span></span>
+        </td>
+
+        <td><span th:text="${t.birthday}"></span></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>课程页面</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>课程管理</h3>
+<hr>
+  <div style="display: flex">
+      <div style="width: 50%;">
+        <table border="1" width="80%">
+                <tr th:each = "c : ${cs}">
+                    <td><span th:text="${c.cno}"></span></td>
+                    <td><span th:text="${c.cname}"></span></td>
+                    <td>
+                        <!--<a th:href="'/book/page?book='+${bookId}+'&page='+${pageNumber}"-->
+                        <a th:href="'/adm/course/go2Update?cno='+${c.cno}">
+                            更改
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="'/adm/course/del?cno='+${c.cno}">
+                        删除该课程
+                    </a>
+                    </td>
+                </tr>
+        </table>
+      </div>
+     <!-- 输入-->
+      <div style="width: 48%;">
+          <button><a href="/adm/course/go2Add">添加一个新课程</a></button>
+          <hr>
+          <h4 th:if="${action=='Add'}">添加课程</h4>
+          <h4 th:if="${action=='Update'}">修改课程</h4>
+          <form  th:action="'/adm/course/do' + ${action}" method='post'>
+              <p>课程编号:<input type='text' name='cno'
+                             th:value="${course.cno}"
+                             th:readonly="${action=='Update'}"></p>
+              <p>课程名称:<input type='text' name='cname'
+                             th:value="${course.cname}"></p>
+              <p th:if="${action=='Add'}"><input type='submit' value='添加课程'></p>
+              <p th:if="${action=='Update'}"><input type='submit' value='更新课程'></p>
+          </form>
+      </div>
+  </div>
+</body>
+</html>

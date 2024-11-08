@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+</head>
+<body>
+   <h2>学生带图片的添加</h2>
+   <!--public String add(Stu stu, MultipartFile filex) -->
+
+   <form  action="/file/add" method="post"
+          enctype="multipart/form-data">
+       sno:<input name="sno" type="text" />
+       <hr>
+       sname:<input name="sname" type="text" />
+       <hr>
+       phone:<input name="phone" type="text" />
+       <hr>
+
+
+       请选择图片:<input name="img" type="file" />
+       <hr>
+       <input type="submit"/>
+   </form>
+</body>
+</html>

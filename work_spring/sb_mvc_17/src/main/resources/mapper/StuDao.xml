@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- namespace 命名空间  对应接口的包名称-->
+<mapper namespace="cn.tom.dao.StuDao">
+
+  <!-- public int add(Student t);-->
+    <!--  private String sno;
+    private String sname;
+    private String phone;
+    private String clzno;
+    private Date birthday;-->
+  <insert id="add" parameterType="cn.tom.entity.Student">
+      insert into t_student (sno, sname, phone,clzno, birthday)
+      values(#{sno}, #{sname}, #{phone},#{clzno}, #{birthday})
+  </insert>
+
+   <select id="findOne" resultType="cn.tom.entity.Student"
+           parameterType="String" >
+       select sno, sname, phone,clzno, birthday from t_student
+       where sno = #{sno}
+   </select>
+
+    <!--
+        //分页, 避免全部找出来（速度很慢）
+
+    public List<Student> findPage(@Param("curline") int n1,
+                                  @Param("lines") int n2);
+       如果条件多， 走 map
+    -->
+     <select id="findPage"  >
+        select sno, sname, phone,clzno, birthday
+        from t_student
+        limit #{curline}, #{lines}
+     </select>
+    <!--
+    //分页， 找出对应条件的总的记录数， 计算页数
+    public int getTotal();
+    -->
+    <select id = "getTotal"  resultType="int">
+        select count(*) from t_student;
+    </select>
+
+
+</mapper>

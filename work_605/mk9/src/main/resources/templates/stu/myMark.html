@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生-我的成绩</title>
+</head>
+<body>
+<div th:include="main::nav">
+
+</div>
+<h3>我的成绩</h3>
+<hr>
+<table width="90%" border="1" cellspacing="0">
+    <tr>
+        <th>班级编号</th>
+        <th>班级名称号</th>
+        <th>学号</th>
+        <th>学生姓名</th>
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>分数</th>
+        <th>录入时间</th>
+    </tr>
+    <tr th:each="m  : ${mks}">
+        <td><span th:text="${m.clzno}"></span></td>
+        <td><span th:text="${m.clzname}"></span></td>
+        <td><span th:text="${m.sno}"></span></td>
+        <td><span th:text="${m.sname}"></span></td>
+        <td><span th:text="${m.cno}"></span></td>
+        <td><span th:text="${m.cname}"></span> </td>
+        <td><span th:text="${m.score}"></span></td>
+        <td><span th:text="${m.tpost}"></span></td>
+    </tr>
+</table>
+</body>
+</html>
