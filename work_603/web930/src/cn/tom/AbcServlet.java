@@ -15,6 +15,11 @@ public class AbcServlet extends HttpServlet {
     }
 
     @Override
+    public void hello() {
+
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //1. 获取请求动作  <a  href='请求动作' />
         //2. 获取请求动作  <form method='GET' action='请求动作' >

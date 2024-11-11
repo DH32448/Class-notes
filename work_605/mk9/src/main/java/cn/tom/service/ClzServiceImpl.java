@@ -3,9 +3,11 @@ package cn.tom.service;
 import cn.tom.dao.ClzMapper;
 import cn.tom.entity.Clz;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("clzService")
 public class ClzServiceImpl implements ClzService {
     @Autowired
     ClzMapper clzMapper;

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /*
@@ -31,8 +33,12 @@ import java.util.List;
 public class AdmClzController {
     @Autowired(required = false)
     ClzService clzService;
+
+    @Resource(name="clzService")
+    ClzService clzService2;
     //添加页面
-    @RequestMapping("/go2Add")    //adm/clz/go2Add
+    @RequestMapping(value = "/go2Add",method = RequestMethod.GET)    //adm/clz/go2Add
+    //@GetMapping
     public String  go2Add(Model model) {
         //1 拿 session, 是不是登录
         //2 . role  == adm

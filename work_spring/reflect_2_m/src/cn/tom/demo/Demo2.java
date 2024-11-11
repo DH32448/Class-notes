@@ -25,6 +25,9 @@ public class Demo2 {
         System.out.println(m);
 //        Object 返回值 = method.invoke(Object  当前方法所在的对象, Object 参数1， Object 参数2)
 //        方法对象
+//        m.invoke(ctl, request, response);
+
+        //clzControoler.add(HttpServletRequest request, HttpServletResponse response)
 
     }
 
